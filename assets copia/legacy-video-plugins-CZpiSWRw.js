@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/index.umd-DOrtx6Mb.js","assets/chunk-CnRmWPt_.js"])))=>i.map(i=>d[i]);
+import{a as e}from"./chunk-CnRmWPt_.js";import{t}from"./preload-helper-CDPbUJct.js";import{i as n,n as r}from"./tslib.es6-ZgYAWwqv.js";function i(i){return r(this,void 0,void 0,function(){var r;return n(this,function(n){switch(n.label){case 0:return[4,t(()=>import(`./index.umd-DOrtx6Mb.js`).then(t=>e(t.default)),__vite__mapDeps([0,1]))];case 1:return r=n.sent(),i._plugins=r,[2]}})})}export{i as loadLegacyVideoPlugins};
