@@ -71,7 +71,7 @@ return environments[window.location.origin] || "";`,__wwtype:`js`,defaultValue:`
   "https://1b2f365d-11e8-40cd-9ccd-ec392f0b4b49-editor.weweb.io": "sandbox",
   "https://sandbox.winchange.io": "sandbox",
   "https://app.winchange.io": "live",
-  "https://backup.winchange.io": "live"
+  "https://backup.winchange.io": "sandbox"
 };
 
 // Si la variable sbx es true, prioriza sandbox
@@ -83,7 +83,7 @@ return environments[window.location.origin] || "";`,__wwtype:`js`}},{key:`X-Proj
   "https://1b2f365d-11e8-40cd-9ccd-ec392f0b4b49-editor.weweb.io": "v4",
   "https://sandbox.winchange.io": "v5",
   "https://app.winchange.io": "v4",
-  "https://backup.winchange.io": "v4"
+  "https://backup.winchange.io": "v5"
 };
 
 // Si la variable sbx es true, prioriza sandbox
