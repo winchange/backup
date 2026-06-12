@@ -1,0 +1,549 @@
+.ww-page-load-progress[data-v-2857ebbc]{opacity:0;pointer-events:none;z-index:2147483647;align-items:flex-start;height:3px;display:flex;position:fixed;top:0;left:0;right:0}.ww-page-load-progress.display[data-v-2857ebbc]{opacity:1}.ww-page-load-progress .progress[data-v-2857ebbc]{background:red;height:100%;transition:width .3s linear}html{width:100%;overflow-x:hidden}html.ww-link-popup-open{overflow-y:hidden}.website-wrapper[data-v-da2b12ca]{height:100%}.website-wrapper .placeholder-section[data-v-da2b12ca]{opacity:0;pointer-events:none;width:0;height:0;overflow:hidden}.website-wrapper .sections-wrapper[data-v-da2b12ca]{isolation:isolate;position:relative}.ww-front-popups-enter-active[data-v-da2b12ca],.ww-front-popups-leave-active[data-v-da2b12ca]{transition:all .3s}.ww-front-popups-enter-from[data-v-da2b12ca],.ww-front-popups-leave-to[data-v-da2b12ca]{opacity:0;transform:scale(.95)}.ww-layout{pointer-events:initial;display:flex;position:relative}.no-scroll{overflow:hidden}.ww-link-popup[data-v-25e33e41]{z-index:101;justify-content:center;align-items:center;display:flex;position:fixed;inset:0;overflow-y:auto}.ww-link-popup__background[data-v-25e33e41]{min-height:100%;position:absolute;inset:0}.ww-link-popup__content[data-v-25e33e41]{z-index:102;justify-content:center;align-items:center;width:100%;min-height:20px;max-height:100%;display:flex;position:relative}.ww-section[data-v-140d60c3]{max-width:auto;flex-direction:column;align-items:center;display:flex;position:relative}.ww-section .ww-section-element[data-v-140d60c3]{width:100%}.ww-section .hash-anchor[data-v-140d60c3]{position:absolute;top:0;left:50%}.ww-background-video[data-v-a855411b]{z-index:-1;position:absolute;inset:0;overflow:hidden}.ww-background-video video[data-v-a855411b]{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.ww-background-video video.cover[data-v-a855411b]{min-width:100%;min-height:100%}.ww-background-video video.contain[data-v-a855411b]{max-width:100%;max-height:100%}.text-link[data-v-165a3ce2]{-webkit-text-decoration:inherit;text-decoration:inherit;cursor:pointer;display:inline-block}a[data-v-91923aeb]{display:inline}.ww-editable-text[data-v-93a6ca74]{overflow-wrap:break-word;-webkit-line-break:after-white-space;outline:none;min-width:5px;display:block}h1[data-v-93a6ca74],h2[data-v-93a6ca74],h3[data-v-93a6ca74],h4[data-v-93a6ca74]{font-size:inherit;font-weight:inherit;margin:0}p[data-v-93a6ca74],.ww-editable-text ol,.ww-editable-text ul{margin:0}.ww-editable-text a{color:inherit;text-decoration:none}.ww-editable-text p{white-space:pre-wrap;margin:0}.ql-clipboard{display:none}*,:after,:before{box-sizing:border-box}button{appearance:unset;text-rendering:unset;color:unset;letter-spacing:unset;word-spacing:unset;text-transform:unset;text-indent:unset;text-shadow:unset;display:unset;text-align:unset;align-items:unset;cursor:unset;background-color:unset;margin:unset;font:unset;padding:unset;border-width:unset;border-style:unset;border-color:unset;border-image:unset;border-radius:unset}p{margin-block-start:unset;margin-block-end:unset;margin-inline-start:unset;margin-inline-end:unset;display:block}a{color:unset;-webkit-text-decoration:unset;text-decoration:unset}
+
+/* === WinChange: capas UX/accesibilidad/PWA inyectadas en build (junio 2026) === */
+
+/* --- mobile.css --- */
+/* ============================================================
+   WinChange — Mobile & PWA Optimizations
+   Importar en main.js después de common.css
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. Safe area: soporte para notch / Dynamic Island / home bar
+   ---------------------------------------------------------- */
+:root {
+    --safe-top:    env(safe-area-inset-top, 0px);
+    --safe-right:  env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left:   env(safe-area-inset-left, 0px);
+
+    /* Touch target mínimo recomendado por Apple/Google: 44px */
+    --touch-target: 44px;
+}
+
+/* ----------------------------------------------------------
+   2. Touch highlight / tap feedback
+   ---------------------------------------------------------- */
+
+/* Eliminar el resaltado gris de Safari/Chrome en tap */
+button,
+input,
+select,
+textarea,
+a,
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"] {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevenir zoom al hacer doble tap en botones e inputs */
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+a,
+label {
+    touch-action: manipulation;
+}
+
+/* Feedback visual en tap (reemplaza el highlight nativo) */
+button:active,
+[role="button"]:active,
+a:active {
+    opacity: 0.75;
+    transition: opacity 0.1s ease;
+}
+
+/* ----------------------------------------------------------
+   3. Touch targets mínimos (44 × 44 px)
+   ---------------------------------------------------------- */
+
+/* Aplicado con clase utilitaria; no sobreescribir componentes globalmente */
+.ww-touch-target {
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ----------------------------------------------------------
+   4. Scroll con momentum en iOS (-webkit-overflow-scrolling)
+   ---------------------------------------------------------- */
+.ww-select__dropdown,
+.multiselect__content-wrapper,
+[class*="dropdown"],
+[class*="popup"],
+[class*="modal__body"],
+[class*="scrollable"] {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+/* ----------------------------------------------------------
+   5. Selección de texto: deshabilitar en UI, mantener en inputs
+   ---------------------------------------------------------- */
+*:not(input):not(textarea):not([contenteditable="true"]) {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* ----------------------------------------------------------
+   6. Callout de iOS (menú de copia al sostener) solo en imágenes
+   ---------------------------------------------------------- */
+img {
+    -webkit-touch-callout: none;
+}
+
+/* ----------------------------------------------------------
+   7. Font-size en inputs: 16px mínimo para evitar auto-zoom en iOS
+   ---------------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+textarea,
+select {
+    font-size: max(16px, 1em);
+}
+
+/* ----------------------------------------------------------
+   8. Clases utilitarias de safe area para elementos fijos
+   ---------------------------------------------------------- */
+
+/* Padding interno que respeta el notch */
+.safe-padding {
+    padding-top:    var(--safe-top);
+    padding-right:  var(--safe-right);
+    padding-bottom: var(--safe-bottom);
+    padding-left:   var(--safe-left);
+}
+
+/* Margen para elementos fijos en la parte inferior (home bar) */
+.safe-bottom {
+    margin-bottom: var(--safe-bottom);
+}
+.safe-top {
+    margin-top: var(--safe-top);
+}
+
+/* ----------------------------------------------------------
+   9. Branding / botones fijos: respetar safe area
+   ---------------------------------------------------------- */
+.ww-branding-button {
+    position: fixed;
+    bottom: max(8px, calc(8px + var(--safe-bottom)));
+    right:  max(8px, calc(8px + var(--safe-right)));
+    min-height: var(--touch-target);
+    min-width:  var(--touch-target);
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgb(38, 38, 38);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .ww-branding-button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+/* ----------------------------------------------------------
+   10. Progress bar: respetar notch en la parte superior
+   ---------------------------------------------------------- */
+.ww-page-load-progress {
+    top: var(--safe-top) !important;
+}
+
+/* ----------------------------------------------------------
+   11. Tablas: scroll horizontal en móvil
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+    .ww-data-grid,
+    [class*="ag-theme"] {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ----------------------------------------------------------
+   12. Tabs: auto-width y scroll horizontal en pantallas pequeñas
+   ---------------------------------------------------------- */
+@media (max-width: 639px) {
+    [class*="tabs-container"],
+    [class*="ww-tabs"] {
+        min-width: auto !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    [class*="tabs-container"]::-webkit-scrollbar,
+    [class*="ww-tabs"]::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* ----------------------------------------------------------
+   13. Inputs OTP: tamaño mínimo de touch en móvil
+   ---------------------------------------------------------- */
+@media (max-width: 480px) {
+    .ww-input-otp input,
+    [class*="otp"] input {
+        min-width: 48px  !important;
+        min-height: 56px !important;
+        font-size: 20px  !important;
+    }
+}
+
+/* ----------------------------------------------------------
+   14. Dropdowns: altura máxima adaptada al viewport
+   ---------------------------------------------------------- */
+@media (max-height: 700px) {
+    .ww-select__dropdown,
+    .multiselect__content-wrapper,
+    [class*="dropdown-list"] {
+        max-height: 40vh !important;
+    }
+}
+
+/* ----------------------------------------------------------
+   15. Modal / Link Popup: safe area y scroll interno
+   ---------------------------------------------------------- */
+.ww-link-popup {
+    padding-top:    var(--safe-top);
+    padding-right:  var(--safe-right);
+    padding-bottom: var(--safe-bottom);
+    padding-left:   var(--safe-left);
+}
+
+.ww-link-popup__content {
+    max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ----------------------------------------------------------
+   16. Altura de viewport real (dvh) — fallback a vh
+   ---------------------------------------------------------- */
+.ww-full-height {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height en iOS Safari 16+ */
+}
+
+/* --- accessibility.css --- */
+/* ============================================================
+   WinChange — Accesibilidad (WCAG 2.1 AA)
+   Importado en index.js después de mobile.css
+   ------------------------------------------------------------
+   Capa transversal y segura: no toca componentes concretos,
+   solo refuerza navegación por teclado, foco visible, motion
+   safety y utilidades para lectores de pantalla.
+
+   Motivación: el caso ONCE (22.000 vendedores con discapacidad)
+   no salió por falta de accesibilidad. Esta capa cubre los
+   hallazgos preliminares del plan de acción (sección 2.5).
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. Foco visible para navegación por teclado / switch / voz
+   ----------------------------------------------------------
+   WeWeb elimina el outline nativo en muchos elementos. Lo
+   restauramos SOLO con :focus-visible para no molestar al
+   usuario de ratón/táctil, pero sí al de teclado/switch.
+   ---------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[role="tab"]:focus-visible,
+[role="menuitem"]:focus-visible,
+[role="option"]:focus-visible,
+[role="checkbox"]:focus-visible,
+[role="radio"]:focus-visible,
+[contenteditable="true"]:focus-visible {
+    outline: 3px solid #1A5276; /* azul HM oscuro: alto contraste sobre claro y sobre azul medio */
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Variante sobre fondos oscuros/azules: anillo claro de respaldo */
+@media (prefers-color-scheme: dark) {
+    a:focus-visible,
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    [role="tab"]:focus-visible {
+        outline-color: #EAF2F8;
+    }
+}
+
+/* No eliminar nunca el foco si el navegador no soporta :focus-visible */
+@supports not selector(:focus-visible) {
+    a:focus,
+    button:focus,
+    [role="button"]:focus,
+    [role="tab"]:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: 3px solid #1A5276;
+        outline-offset: 2px;
+    }
+}
+
+/* ----------------------------------------------------------
+   2. Motion safety (vestibular)
+   ----------------------------------------------------------
+   La app usa animejs + swiper + transiciones. Respetamos la
+   preferencia del sistema "reducir movimiento".
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* GIFs animados pesados: no podemos pausarlos por CSS, pero
+       sí evitamos auto-scroll de carruseles bruscos */
+    .swiper-wrapper {
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ----------------------------------------------------------
+   3. Utilidad para lectores de pantalla (sr-only)
+   ----------------------------------------------------------
+   Permite añadir etiquetas accesibles a iconos del header
+   (Mensajes / Avisos / Ayuda) sin cambiar el diseño visual.
+   Uso: <span class="sr-only">Mensajes</span>
+   ---------------------------------------------------------- */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Skip link: visible al recibir foco con Tab */
+.skip-to-content {
+    position: absolute;
+    left: 50%;
+    top: -64px;
+    transform: translateX(-50%);
+    z-index: 100000;
+    padding: 12px 20px;
+    background: #1A5276;
+    color: #fff;
+    border-radius: 0 0 8px 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.15s ease;
+}
+.skip-to-content:focus {
+    top: 0;
+}
+
+/* ----------------------------------------------------------
+   4. Touch targets mínimos en barras de navegación
+   ----------------------------------------------------------
+   Hallazgo 2.5: los ítems de la bottom nav caen por debajo de
+   44px. Garantizamos el mínimo en cualquier elemento clicable
+   dentro de barras fijas, sin romper el layout (solo crece el
+   área tocable, no el icono).
+   ---------------------------------------------------------- */
+[class*="navigation"] a,
+[class*="navigation"] [role="button"],
+[class*="bottom"] a,
+[class*="bottom"] [role="button"],
+nav a,
+nav [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* ----------------------------------------------------------
+   5. Estados deshabilitados perceptibles (no solo color)
+   ---------------------------------------------------------- */
+button:disabled,
+[role="button"][aria-disabled="true"],
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* ----------------------------------------------------------
+   6. Modo alto contraste / forced-colors (Windows, accesibilidad)
+   ---------------------------------------------------------- */
+@media (forced-colors: active) {
+    a:focus-visible,
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    [role="tab"]:focus-visible {
+        outline: 3px solid CanvasText;
+    }
+    button,
+    [role="button"] {
+        border: 1px solid ButtonText;
+    }
+}
+
+/* ----------------------------------------------------------
+   7. Texto: legibilidad mínima
+   ----------------------------------------------------------
+   Evita texto por debajo de 12px en exteriores (perfil deskless).
+   No fuerza tamaños del diseño, solo pone un suelo de seguridad.
+   ---------------------------------------------------------- */
+.ww-text {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- uxpolish.css --- */
+/* ============================================================
+   WinChange — UX polish (quick wins viables por CSS)
+   Importado en index.js después de accessibility.css
+   ------------------------------------------------------------
+   Solo se incluyen aquí los quick wins del plan de acción que
+   se pueden aplicar de forma SEGURA y DURADERA sobre clases
+   estables de WeWeb (.ww-button, .ww-text, .dropdown, .ww-link-popup).
+   Los quick wins que dependen de configuración por-componente
+   (QW6 label de tab activo, QW7 doble CTA, QW10/11 gamificación)
+   se documentan en CAMBIOS_UX.md para ejecutarlos en el editor WeWeb.
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Tokens de UX unificados (referencia interna de esta capa)
+   ---------------------------------------------------------- */
+:root {
+    /* Azul primario HM unificado (QW5). #2980B9 = "primary/600" */
+    --wc-primary-600: #2980B9;
+    --wc-primary-700: #1F618D;
+    --wc-primary-800: #1A5276;
+
+    /* Gris de metadatos accesible (QW8): #5A5A5A ≈ 7:1 sobre blanco */
+    --wc-meta-text: #5A5A5A;
+}
+
+/* ----------------------------------------------------------
+   1. Feedback de interacción consistente en botones (QW5 parcial)
+   ----------------------------------------------------------
+   Da a TODOS los botones WeWeb el mismo comportamiento al pulsar,
+   pasar el ratón y deshabilitar, sin cambiar su color de marca.
+   ---------------------------------------------------------- */
+.ww-button {
+    cursor: pointer;
+    transition: filter 0.12s ease, opacity 0.12s ease, transform 0.06s ease;
+}
+.ww-button:hover {
+    filter: brightness(0.96);
+}
+.ww-button:active {
+    transform: scale(0.985);
+    filter: brightness(0.92);
+}
+.ww-button[aria-disabled="true"],
+.ww-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: none;
+    transform: none;
+}
+
+/* Cualquier elemento marcado como botón/enlace recibe cursor correcto */
+a,
+[role="button"],
+[role="tab"],
+label[for] {
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------------
+   2. Comentarios / listas largas: scroll fluido (QW9 apoyo)
+   ----------------------------------------------------------
+   No reemplaza la paginación numerada (eso es lógica de
+   componente), pero suaviza el scroll de las zonas con scroll.
+   ---------------------------------------------------------- */
+[class*="scrollable"],
+[class*="list"] {
+    scroll-behavior: smooth;
+}
+
+/* ----------------------------------------------------------
+   3. Dropdowns / popups: sombra y radio consistentes
+   ---------------------------------------------------------- */
+.dropdown__content,
+.ww-link-popup__content {
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(26, 82, 118, 0.16);
+}
+
+/* ----------------------------------------------------------
+   4. Imágenes: evitar layout shift (CLS) y mejorar render
+   ---------------------------------------------------------- */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ----------------------------------------------------------
+   5. Tarjetas: tratamiento de sombra homogéneo (consistencia 2.4)
+   ----------------------------------------------------------
+   Hallazgo: "cards con sombras suaves, otras planas, otras con
+   borde". Homogeneizamos SOLO el radio para no romper colores.
+   ---------------------------------------------------------- */
+[class*="card"],
+[class*="Card"] {
+    border-radius: 14px;
+}
+
+/* ============================================================
+   OPCIONAL — Contraste de metadatos (QW8) por override de tokens
+   ------------------------------------------------------------
+   Los grises claros del tema WeWeb (#ABB2B9 ≈ 1.9:1, #808B96 ≈ 3:1)
+   no cumplen WCAG AA para texto. Si quieres forzar el contraste a
+   nivel global, DESCOMENTA el bloque siguiente. Riesgo: estos
+   tokens también pueden usarse en bordes/divisores, que se verán
+   un poco más oscuros. Pruébalo y decide.
+   ============================================================ */
+/*
+:root {
+    --a6ea4762-9d02-4c2d-b32c-56d52e1cd968: #5A6B7B !important;
+    --0a74bcf9-78be-42f5-affa-f042b3abb1b4: #5A6B7B !important;
+}
+*/
